@@ -1,0 +1,86 @@
+/dts-v1/;
+#include "sun8i-v3s.dtsi"
+#include "sunxi-common-regulators.dtsi"
+
+/ {
+	// 改设备名字
+	model = "Atguigu Pi";
+
+	compatible = "atguigu,atguigupi", "allwinner,sun8i-v3s";
+
+	aliases {
+		serial0 = &uart0;
+		// 给以太网取别名
+		ethernet0 = &emac;
+		// 给SPI起别名
+		spi0 = &spi0;
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+};
+
+&mmc0 {
+	broken-cd;
+	bus-width = <4>;
+	vmmc-supply = <&reg_vcc3v3>;
+	status = "okay";
+};
+
+&uart0 {
+	pinctrl-0 = <&uart0_pb_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+// 开启以太网
+&emac {
+	allwinner,leds-active-low;
+	status = "okay";
+};
+
+// 开启SPI和FLASH
+&spi0 {
+	status = "okay";
+	w25q256:w25q256@0 {
+		compatible = "winbond,w25q256", "jedec,spi-nor";
+		reg = <0x0>;
+		spi-max-frequency = <50000000>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+		// 由于Flash没有分区表，需要在设备树文件中声明flash分区
+		// 这里总共分了5个区
+
+		partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			partition-uboot {
+				reg = <0x0 0x80000>;
+				read-only;
+			};
+	
+			partition-dtb {
+				reg = <0x80000 0x8000>;
+				read-only;
+			};
+	
+			partition-kernel {
+				reg = <0x88000 0x6F8000>;
+				read-only;
+			};
+	
+			partition-rootfs {
+				reg = <0x780000 0x1080000>;
+				read-only;
+			};
+
+			partition-data {
+				reg = <0x1800000 0x800000>;
+			};
+		};
+	};
+};
+

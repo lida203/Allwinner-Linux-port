@@ -1,0 +1,221 @@
+manifest_format=1.6
+
+# Note that for ABE, these parameters are not used
+# Component data for dejagnu
+dejagnu_url=https://git.linaro.org/git/toolchain
+dejagnu_branch=linaro-local/stable
+dejagnu_revision=e35e23954791251cf332d15df1958459f94ae584
+dejagnu_filespec=dejagnu.git
+dejagnu_mingw_only="no"
+dejagnu_linuxhost_only="no"
+dejagnu_staticlink="yes"
+
+# Component data for gmp
+gmp_url=https://snapshots.linaro.org/components/toolchain/infrastructure
+gmp_filespec=gmp-6.1.2.tar.xz
+gmp_md5sum=f58fa8001d60c4c77595fbbb62b63c1d
+gmp_mingw_only="no"
+gmp_linuxhost_only="no"
+gmp_configure="--enable-cxx --enable-fft"
+gmp_staticlink="yes"
+
+# Component data for mpfr
+mpfr_url=https://snapshots.linaro.org/components/toolchain/infrastructure
+mpfr_filespec=mpfr-3.1.5.tar.xz
+mpfr_md5sum=c4ac246cf9795a4491e7766002cd528f
+mpfr_mingw_only="no"
+mpfr_linuxhost_only="no"
+mpfr_configure="--with-gmp=${local_builds}/destdir/${host}"
+mpfr_staticlink="yes"
+
+# Component data for mpc
+mpc_url=https://snapshots.linaro.org/components/toolchain/infrastructure/
+mpc_filespec=mpc-1.0.3.tar.gz
+mpc_md5sum=d6a1d5f8ddea3abd2cc3e98f58352d26
+mpc_mingw_only="no"
+mpc_linuxhost_only="no"
+mpc_configure="--with-gmp=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host}"
+mpc_staticlink="yes"
+
+# Component data for binutils
+binutils_url=https://git.linaro.org/git/toolchain
+binutils_branch=binutils-2_40-branch
+binutils_revision=b765cd80a589537d5d3ab2fa323ad6933a579552
+binutils_filespec=binutils-gdb.git
+binutils_mingw_only="no"
+binutils_linuxhost_only="no"
+binutils_configure="--enable-lto --enable-plugins --enable-gold --disable-werror CPPFLAGS=-UFORTIFY_SOURCE --with-pkgversion=Linaro_Binutils-2023.06 --disable-gdb --disable-sim --disable-libdecnumber --disable-readline --with-sysroot=${local_builds}/destdir/${host}/arm-linux-gnueabihf"
+binutils_staticlink="yes"
+
+# Component data for linux
+linux_url=git://git.kernel.org/pub/scm/linux/kernel/git/stable
+linux_branch=linux-rolling-lts
+linux_revision=8ae2925d90cdc0c160802f750953fbc4887f0f13
+linux_filespec=linux.git
+linux_mingw_only="no"
+linux_linuxhost_only="no"
+linux_staticlink="yes"
+
+# Component data for expat
+expat_url=https://snapshots.linaro.org/components/toolchain/infrastructure/
+expat_filespec=expat-2.1.0-1-mingw32-dev.tar.xz
+expat_md5sum=1dae54e2670882843d496692154a0e27
+expat_mingw_only="yes"
+expat_linuxhost_only="no"
+expat_staticlink="yes"
+
+# Component data for python
+python_url=https://snapshots.linaro.org/components/toolchain/infrastructure/
+python_filespec=python-2.7.4-mingw32.tar.xz
+python_md5sum=9b3092eff5508c4802936dfe4f5225ef
+python_mingw_only="yes"
+python_linuxhost_only="no"
+python_staticlink="yes"
+
+# Component data for libiconv
+libiconv_url=https://snapshots.linaro.org/components/toolchain/infrastructure/
+libiconv_filespec=libiconv-1.14-3-mingw32-dev.tar.xz
+libiconv_md5sum=7ead614fa3a8bc266e70c6fcdf198219
+libiconv_mingw_only="yes"
+libiconv_linuxhost_only="no"
+libiconv_staticlink="yes"
+
+# Component data for gcc
+gcc_url=https://git.linaro.org/git/toolchain
+gcc_branch=releases/gcc-12
+gcc_revision=256cb821273d328e98d87aae2a061e0e889ec408
+gcc_filespec=gcc.git
+gcc_makeflags="MAKEINFOFLAGS=--force"
+gcc_mingw_only="no"
+gcc_linuxhost_only="no"
+gcc_configure=
+gcc_mingw_extraconf="--with-libiconv-prefix=${local_builds}/destdir/${host}/usr --with-system-zlib=no"
+gcc_staticlink="no"
+gcc_stage1_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --with-gnu-as --with-gnu-ld --disable-libmudflap --enable-lto --enable-shared --without-included-gettext --enable-nls --with-system-zlib --disable-sjlj-exceptions --enable-gnu-unique-object --enable-linker-build-id --disable-libstdcxx-pch --enable-c99 --enable-clocale=gnu --enable-libstdcxx-debug --enable-long-long --with-cloog=no --with-ppl=no --with-isl=no --disable-multilib --with-float=hard --with-fpu=vfpv3-d16 --with-mode=thumb --with-tune=cortex-a9 --with-arch=armv7-a --enable-threads=posix --enable-multiarch --enable-libstdcxx-time=yes --enable-gnu-indirect-function --disable-libssp --disable-libquadmath --disable-threads --without-headers --with-newlib --disable-libmudflap --disable-decimal-float --disable-libgomp --disable-libatomic --disable-libsanitizer --disable-plugins --disable-libitm --enable-languages=c,c++ --disable-libstdcxx --disable-libvtv --disable-shared --with-glibc-version=2.18 --disable-bootstrap"
+gcc_stage2_flags="--with-mpc=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} --with-gmp=${local_builds}/destdir/${host} --with-gnu-as --with-gnu-ld --disable-libmudflap --enable-lto --enable-shared --without-included-gettext --enable-nls --with-system-zlib --disable-sjlj-exceptions --enable-gnu-unique-object --enable-linker-build-id --disable-libstdcxx-pch --enable-c99 --enable-clocale=gnu --enable-libstdcxx-debug --enable-long-long --with-cloog=no --with-ppl=no --with-isl=no --disable-multilib --with-float=hard --with-fpu=vfpv3-d16 --with-mode=thumb --with-tune=cortex-a9 --with-arch=armv7-a --enable-threads=posix --enable-multiarch --enable-libstdcxx-time=yes --enable-gnu-indirect-function --with-sysroot=${local_builds}/destdir/${host}/arm-linux-gnueabihf/libc --enable-checking=release --disable-bootstrap --enable-languages=c,c++,fortran,lto"
+
+# Component data for glibc
+glibc_url=https://git.linaro.org/git/toolchain
+glibc_branch=release/2.37/master
+glibc_revision=3593050c27dcf691f670fd3fa9d347c99351ed2f
+glibc_filespec=glibc.git
+glibc_makeflags="PARALLELMFLAGS=-j32"
+glibc_mingw_only="no"
+glibc_linuxhost_only="no"
+glibc_configure="--disable-profile --without-gd --enable-obsolete-rpc --with-headers=${local_builds}/destdir/${host}/arm-linux-gnueabihf/libc/usr/include libc_cv_forced_unwind=yes libc_cv_c_cleanup=yes --without-selinux --disable-werror"
+
+# Component data for gdb
+gdb_url=https://git.linaro.org/git/toolchain
+gdb_branch=gdb-13-branch
+gdb_revision=05343fb1c4c54bbe078fb722449ce7b1840577d2
+gdb_filespec=binutils-gdb.git
+gdb_makeflags="all-gdb"
+gdb_mingw_only="no"
+gdb_linuxhost_only="no"
+gdb_configure="--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion=Linaro_GDB-2023.06 --disable-gas --disable-binutils --disable-elfcpp --disable-ld --disable-gold --disable-gprof --with-python=python3 --disable-werror --with-auto-load-safe-path=@@debugdir:@@datadir/auto-load:${local_builds}/destdir/${host}/arm-linux-gnueabihf"
+gdb_mingw_extraconf="--disable-tui --with-python=no --with-gmp=${local_builds}/destdir/${host} --with-mpfr=${local_builds}/destdir/${host} CFLAGS=-I${local_builds}/destdir/${host}/usr/include LDFLAGS=-L${local_builds}/destdir/${host}/usr/lib"
+gdb_staticlink="yes"
+
+# Component data for gdbserver
+gdbserver_url=https://git.linaro.org/git/toolchain
+gdbserver_branch=gdb-13-branch
+gdbserver_revision=05343fb1c4c54bbe078fb722449ce7b1840577d2
+gdbserver_filespec=binutils-gdb.git
+gdbserver_makeflags="all-gdbserver"
+gdbserver_mingw_only="no"
+gdbserver_linuxhost_only="no"
+gdbserver_configure="--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion=Linaro_GDB-2023.06 --disable-gas --disable-binutils --disable-elfcpp --disable-ld --disable-gold --disable-gprof --with-python=python3 --disable-gdb"
+gdbserver_staticlink="yes"
+
+# Component data for qemu
+qemu_url=https://gitlab.com/qemu-project
+qemu_branch=v7.0.0
+qemu_revision=823a3f11fb8f04c3c3cc0f95f968fef1bfc6534f
+qemu_filespec=qemu.git
+qemu_mingw_only="no"
+qemu_linuxhost_only="yes"
+qemu_configure="--target-list=arm-linux-user,arm-softmmu"
+qemu_staticlink="no"
+
+
+clibrary=glibc
+target=arm-linux-gnueabihf
+manifestid=a947b459a9ba75c8d4410535393d085715d66d28
+
+ ##############################################################################
+ # Everything below this line is only for informational purposes for developers
+ ##############################################################################
+
+# Build machine data
+build: linux
+host: x86_64-pc-linux-gnu
+kernel: 4.15.0-91-generic
+hostname: d80ff5b0cbd5
+distribution: focal
+host_gcc: gcc version 9.4.0 (Ubuntu 9.4.0-1ubuntu1~20.04.1) 
+
+# These aren't used in the repeat build. just a sanity check for developers
+build directory: /home/tcwg-buildslave/workspace/tcwg-gnu-build/_build/builds
+sysroot directory: /home/tcwg-buildslave/workspace/tcwg-gnu-build/_build/builds/destdir/x86_64-pc-linux-gnu/arm-linux-gnueabihf
+snapshots directory: /home/tcwg-buildslave/workspace/tcwg-gnu-build/snapshots
+git reference directory: /home/tcwg-buildslave/snapshots-ref
+
+abe_url=https://git-us.linaro.org/toolchain
+abe_branch=branch=
+abe_revision=73907198091cede60a1c46119a9a3b14af318a9b
+abe_filespec=abe.git
+abe_configure="--with-local-snapshots=${local_snapshots} --with-git-reference-dir=/home/tcwg-buildslave/snapshots-ref"
+
+--------------------- gcc ----------------------
+commit 256cb821273d328e98d87aae2a061e0e889ec408
+Author: GCC Administrator <gccadmin@gcc.gnu.org>
+Date:   Mon Jun 5 00:20:32 2023 +0000
+
+    Daily bump.
+
+--------------------- binutils ----------------------
+commit b765cd80a589537d5d3ab2fa323ad6933a579552
+Author: GDB Administrator <gdbadmin@sourceware.org>
+Date:   Mon Jun 5 00:01:09 2023 +0000
+
+    Automatic date update in version.in
+
+--------------------- glibc ----------------------
+commit 3593050c27dcf691f670fd3fa9d347c99351ed2f
+Author: Adhemerval Zanella <adhemerval.zanella@linaro.org>
+Date:   Tue May 30 16:40:38 2023 -0300
+
+    io: Fix F_GETLK, F_SETLK, and F_SETLKW for powerpc64
+    
+    Different than other 64 bit architectures, powerpc64 defines the
+    LFS POSIX lock constants  with values similar to 32 ABI, which
+    are meant to be used with fcntl64 syscall.  Since powerpc64 kABI
+    does not have fcntl, the constants are adjusted with the
+    FCNTL_ADJUST_CMD macro.
+    
+    The 4d0fe291aed3a476a changed the logic of generic constants
+    LFS value are equal to the default values; which is now wrong
+    for powerpc64.
+    
+    Fix the value by explicit define the previous glibc constants
+    (powerpc64 does not need to use the 32 kABI value, but it simplifies
+    the FCNTL_ADJUST_CMD which should be kept as compatibility).
+    
+    Checked on powerpc64-linux-gnu and powerpc-linux-gnu.
+    
+    (cherry picked from commit 5f828ff824e3b7cd133ef905b8ae25ab8a8f3d66)
+
+--------------------- abe ----------------------
+commit 73907198091cede60a1c46119a9a3b14af318a9b
+Author: Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>
+Date:   Fri May 26 17:27:43 2023 +0000
+
+    lib/make.sh: Do not run glibc xcheck testing target
+    
+    Glibc's "xcheck" target has a few additional tests compared to
+    "check", but it is not maintained very well, and running both
+    "check" and "xcheck" targets in parallel make them compete for
+    the glibc's testcontainer.* support, which causes test flakiness.
+    
+    Change-Id: I87f16a54f3882a36ccd3e28875781d297f3adbe5
+

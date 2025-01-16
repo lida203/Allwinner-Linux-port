@@ -1,0 +1,49 @@
+/dts-v1/;
+#include "sun8i-v3s.dtsi"
+#include "sunxi-common-regulators.dtsi"
+
+/ {
+	model = "Atguigu Pi";
+	compatible = "atguigu,atguigupi", "allwinner,sun8i-v3s";
+
+	aliases {
+		serial0 = &uart0;
+		// 开启spi设备别名
+		spi0 = &spi0;
+
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+};
+
+&mmc0 {
+	broken-cd;
+	bus-width = <4>;
+	vmmc-supply = <&reg_vcc3v3>;
+	status = "okay";
+};
+
+&uart0 {
+	pinctrl-0 = <&uart0_pb_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+// 开启spi设备
+&spi0 {
+	status = "okay";
+	// 声明总线最高频率
+	spi-max-frequency = <100000000>;
+	// 在spi总线上声明flash芯片
+	w25q256:w25q256@0 {
+		compatible = "winbond,w25q256", "jedec,spi-nor";
+		reg = <0x0>;
+		// 声明芯片最高频率
+		spi-max-frequency = <50000000>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+	};
+};
+
